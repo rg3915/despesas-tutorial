@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1>Adicionar Despesa</h1>
+
+<div>
+  <form
+    action="."
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+
+    <label for="">{{ form.title.label }}</label>
+    {% render_field form.title class="form-control" %}
+    {{ form.errors.title }}
+
+    <label for="">{{ form.value.label }}</label>
+    {% render_field form.value class="form-control" %}
+    {{ form.errors.value }}
+
+    <label for="">{{ form.status.label }}</label>
+    {% render_field form.status class="form-control" %}
+    {{ form.errors.status }}
+    
+    <label for="">{{ form.photo.label }}</label>
+    {% render_field form.photo class="form-control" %}
+    {{ form.errors.photo }}
+    
+    {% for error in form.non_field_errors %}
+      <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+
+    <button
+      class="btn btn-primary mt-3"
+      type="submit"
+    >Salvar</button>
+  </form>
+</div>
+{% endblock content %}

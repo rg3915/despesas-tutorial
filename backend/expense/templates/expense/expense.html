@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Lista de Despesas</h1>
+
+<a
+  href="{% url 'expense:expense_create' %}"
+  class="btn btn-primary"
+>Adicionar</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Valor</th>
+      <th>Status</th>
+      <th>Comprovante</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in expenses %}
+    <tr>
+      <td>
+        <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+      </td>
+      <td>{{ object.value }}</td>
+      <td>{{ object.get_status_display }}</td>
+      <td>
+        {% if object.photo %}
+          <img src="{{ object.photo.url }}" alt="" height="100px">
+        {% endif %}
+      </td>
+      <td>
+        <!-- update -->
+        <a
+          href="{% url 'expense:expense_update' object.pk %}"
+          class="mr-3"
+        >
+          <span>
+            <i class="fa fa-pencil"></i>
+          </span>
+        </a>
+        <!-- delete -->
+        <a href="{% url 'expense:expense_delete' object.pk %}">
+          <span>
+            <i class="fa fa-trash text-danger"></i>
+          </span>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

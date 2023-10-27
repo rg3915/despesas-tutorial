@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Despesa</h1>
+
+<p>Título: {{ object }}</p>
+<p>Valor: R$ {{ object.value }}</p>
+<p>Status: {{ object.get_status_display }}</p>
+
+{% if object.photo %}
+<img
+  src="{{ object.photo.url }}"
+  alt=""
+  height="300px"
+>
+{% endif %}
+{% endblock content %}
